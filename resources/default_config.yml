@@ -1,0 +1,10 @@
+# ********************************* #
+# ******** FASTVEY (ALPHA) ******** #
+# ********************************* #
+# GitHub: https://github.com/MertJSX/fastvey
+
+port: 5000
+jwt-secret: "you_must_change_this"
+admin:
+  username: "admin"
+  password: "123"
