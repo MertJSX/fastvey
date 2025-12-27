@@ -4,6 +4,8 @@ go 1.24.11
 
 require github.com/gofiber/fiber/v2 v2.52.10
 
+require gopkg.in/yaml.v3 v3.0.1 // indirect
+
 require (
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/golang-jwt/jwt/v5 v5.3.0
