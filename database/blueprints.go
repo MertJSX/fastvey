@@ -7,7 +7,7 @@ import (
 
 func CreateSurveysTable() {
 	_, err := DB.Exec(`
-	CREATE TABLE IF NOT EXISTS TABLE surveys (
+	CREATE TABLE IF NOT EXISTS surveys (
     	id INTEGER PRIMARY KEY AUTOINCREMENT,
     	title TEXT NOT NULL,
     	description TEXT,
@@ -25,10 +25,11 @@ func CreateSurveysTable() {
 
 func CreateQuestionsTable() {
 	_, err := DB.Exec(`
-	CREATE TABLE IF NOT EXISTS TABLE questions (
+	CREATE TABLE IF NOT EXISTS questions (
     	id INTEGER PRIMARY KEY AUTOINCREMENT,
     	survey_id INTEGER NOT NULL,
     	question_text TEXT NOT NULL,
+		image TEXT,
     	question_type TEXT DEFAULT 'scale',-- 'scale', it will fixed for now, but I can add more questions types in future like 'text' and 'multiple_choice'
     	min_label TEXT DEFAULT 'Very Good', -- 1
     	max_label TEXT DEFAULT 'Very Bad',  -- 7
@@ -46,7 +47,7 @@ func CreateQuestionsTable() {
 
 func CreateParticipantsTable() {
 	_, err := DB.Exec(`
-	CREATE TABLE IF NOT EXISTS TABLE participants (
+	CREATE TABLE IF NOT EXISTS participants (
     	id INTEGER PRIMARY KEY AUTOINCREMENT,
     	survey_id INTEGER NOT NULL,
     	email TEXT NOT NULL,
@@ -68,7 +69,7 @@ func CreateParticipantsTable() {
 
 func CreateResponsesTable() {
 	_, err := DB.Exec(`
-	CREATE TABLE IF NOT EXISTS TABLE responses (
+	CREATE TABLE IF NOT EXISTS responses (
     	id INTEGER PRIMARY KEY AUTOINCREMENT,
     	participant_id INTEGER NOT NULL,
     	question_id INTEGER NOT NULL,
