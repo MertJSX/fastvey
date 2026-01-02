@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/MertJSX/fastvey-server/middleware"
 	"github.com/MertJSX/fastvey-server/routes"
 	"github.com/MertJSX/fastvey-server/utils"
 	"github.com/gofiber/fiber/v2"
@@ -25,6 +26,10 @@ func main() {
 		return c.SendString("Not implemented yet")
 	})
 
+	app.Use("/api/admin", func(c *fiber.Ctx) error {
+		return middleware.CheckAuth(c)
+	})
+
 	app.Get("/api/admin/dashboard", func(c *fiber.Ctx) error {
 		return c.SendString("Not implemented yet")
 	})
@@ -34,7 +39,7 @@ func main() {
 	})
 
 	app.Post("/api/admin/surveys/new", func(c *fiber.Ctx) error {
-		return c.SendString("Not implemented yet")
+		return routes.NewSurvey(c)
 	})
 
 	app.Delete("/api/admin/surveys/delete/:id", func(c *fiber.Ctx) error {
