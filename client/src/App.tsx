@@ -2,11 +2,12 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './global.css';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import SurveysList from './pages/SurveysList';
+import SurveysList from './components/SurveysList';
 import Survey from './pages/Survey';
 import EditSurvey from './pages/EditSurvey';
 import NewSurvey from './pages/NewSurvey';
 import Cookies from "js-cookie";
+import Navbar from './components/Navbar';
 import type { ReactNode } from 'react';
 
 interface ProtectedRouteProps {
@@ -17,7 +18,13 @@ const ProtectedRoute = ({ children } : ProtectedRouteProps) => {
   if (!Cookies.get("token")) {
     return <Navigate to="/login" replace />;
   }
-  return children;
+
+  return <div className="flex flex-col items-center justify-center w-full">
+    <Navbar />
+    <div className='w-full'>
+    {children}
+    </div>
+  </div>
 };
 
 function App() {
