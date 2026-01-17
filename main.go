@@ -38,11 +38,11 @@ func main() {
 		return routes.GetSurveyTemplates(c)
 	})
 
-	app.Post("/api/admin/surveys-templates/new", func(c *fiber.Ctx) error {
+	app.Post("/api/admin/survey-templates/new", func(c *fiber.Ctx) error {
 		return routes.NewSurveyTemplate(c)
 	})
 
-	app.Delete("/api/admin/surveys-templates/delete/:id", func(c *fiber.Ctx) error {
+	app.Delete("/api/admin/survey-templates/delete/:id", func(c *fiber.Ctx) error {
 		return c.SendString("Not implemented yet")
 	})
 
