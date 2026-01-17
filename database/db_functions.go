@@ -11,7 +11,7 @@ func CreateSurveyTemplate(surveyTemplate types.SurveyTemplate) (uint, error) {
 	INSERT INTO survey_templates (
     	title,
     	description
-	) VALUES (?, ?, ?);
+	) VALUES (?, ?);
 	`)
 
 	if err != nil {
@@ -94,7 +94,7 @@ func GetQuestions(surveyTemplateID int) ([]types.Question, error) {
 	var foundList []types.Question
 	rows, err := DB.Query(`
 	SELECT * FROM questions
-	WHERE survey_id = ?
+	WHERE survey_template_id = ?
 	ORDER BY display_order
 	`, surveyTemplateID)
 
