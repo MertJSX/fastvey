@@ -25,7 +25,7 @@ func InitializeDatabase() {
 		log.Fatal(err)
 	}
 
-	CreateSurveysTable()
+	CreateSurveyTemplatesTable()
 	CreateQuestionsTable()
 	CreateParticipantsTable()
 	CreateResponsesTable()

@@ -5,14 +5,33 @@ import (
 	"log"
 )
 
+func CreateSurveyTemplatesTable() {
+	_, err := DB.Exec(`
+	CREATE TABLE IF NOT EXISTS survey_templates (
+    	id INTEGER PRIMARY KEY AUTOINCREMENT,
+    	title TEXT NOT NULL,
+    	description TEXT,
+    	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);`)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Survey templates table has been created!")
+}
+
 func CreateSurveysTable() {
 	_, err := DB.Exec(`
 	CREATE TABLE IF NOT EXISTS surveys (
     	id INTEGER PRIMARY KEY AUTOINCREMENT,
+    	survey_template_id INTEGER NOT NULL,
     	title TEXT NOT NULL,
-    	description TEXT,
 		email_suffix TEXT,
-    	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+		start_date TEXT,
+		end_date TEXT,
+    	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    	FOREIGN KEY (survey_template_id) REFERENCES survey_templates(id) ON DELETE CASCADE
 	);
 	`)
 
@@ -20,21 +39,21 @@ func CreateSurveysTable() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Surveys table has been created!")
+	fmt.Println("Survey templates table has been created!")
 }
 
 func CreateQuestionsTable() {
 	_, err := DB.Exec(`
 	CREATE TABLE IF NOT EXISTS questions (
     	id INTEGER PRIMARY KEY AUTOINCREMENT,
-    	survey_id INTEGER NOT NULL,
+    	survey_template_id INTEGER NOT NULL,
     	question_text TEXT NOT NULL,
 		image TEXT,
     	question_type TEXT DEFAULT 'scale',-- 'scale', it will fixed for now, but I can add more questions types in future like 'text' and 'multiple_choice'
     	min_label TEXT DEFAULT 'Very Good', -- 1
     	max_label TEXT DEFAULT 'Very Bad',  -- 7
     	display_order INTEGER NOT NULL,
-    	FOREIGN KEY (survey_id) REFERENCES surveys(id) ON DELETE CASCADE
+    	FOREIGN KEY (survey_template_id) REFERENCES survey_templates(id) ON DELETE CASCADE
 	);
 	`)
 

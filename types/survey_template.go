@@ -1,10 +1,8 @@
 package types
 
-type Survey struct {
+type SurveyTemplate struct {
 	Id          *uint   `json:"id,omitempty"`
 	Title       string  `json:"title"`
-	EmailSuffix string  `json:"emailSuffix"`
-	StartDate   string  `json:"startDate"`
-	EndDate     string  `json:"endDate"`
+	Description string  `json:"description"`
 	CreatedAt   *string `json:"createdAt,omitempty"`
 }

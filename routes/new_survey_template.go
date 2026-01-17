@@ -6,10 +6,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func NewSurvey(c *fiber.Ctx) error {
+func NewSurveyTemplate(c *fiber.Ctx) error {
 	var requestBody struct {
-		SurveyInfo types.Survey     `json:"surveyInfo"`
-		Questions  []types.Question `json:"questions"`
+		SurveyTemplateInfo types.SurveyTemplate `json:"surveyTemplateInfo"`
+		Questions          []types.Question     `json:"questions"`
 	}
 
 	if err := c.BodyParser(&requestBody); err != nil {
@@ -24,7 +24,7 @@ func NewSurvey(c *fiber.Ctx) error {
 		)
 	}
 
-	surveyId, err := database.CreateSurvey(requestBody.SurveyInfo)
+	surveyId, err := database.CreateSurveyTemplate(requestBody.SurveyTemplateInfo)
 
 	if err != nil {
 		return c.Status(500).JSON(
@@ -33,7 +33,7 @@ func NewSurvey(c *fiber.Ctx) error {
 	}
 
 	for i, v := range requestBody.Questions {
-		v.SurveyId = &surveyId
+		v.SurveyTemplateId = &surveyId
 		displayOrder := uint(i)
 		v.DisplayOrder = &displayOrder
 		requestBody.Questions[i] = v

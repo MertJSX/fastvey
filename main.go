@@ -34,15 +34,15 @@ func main() {
 		return c.SendString("Not implemented yet")
 	})
 
-	app.Get("/api/admin/surveys", func(c *fiber.Ctx) error {
-		return c.SendString("Not implemented yet")
+	app.Get("/api/admin/surveys-templates", func(c *fiber.Ctx) error {
+		return routes.GetSurveyTemplates(c)
 	})
 
-	app.Post("/api/admin/surveys/new", func(c *fiber.Ctx) error {
-		return routes.NewSurvey(c)
+	app.Post("/api/admin/surveys-templates/new", func(c *fiber.Ctx) error {
+		return routes.NewSurveyTemplate(c)
 	})
 
-	app.Delete("/api/admin/surveys/delete/:id", func(c *fiber.Ctx) error {
+	app.Delete("/api/admin/surveys-templates/delete/:id", func(c *fiber.Ctx) error {
 		return c.SendString("Not implemented yet")
 	})
 
