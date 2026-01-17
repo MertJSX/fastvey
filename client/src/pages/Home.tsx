@@ -1,11 +1,11 @@
-import SurveysList from "../components/SurveysList"
+import SurveyTemplatesList from "../components/SurveyTemplatesList"
 import GeneralStats from "../components/GeneralStats"
 
 const Home = () => {
   return (
     <div className="flex gap-2 px-2">
       <GeneralStats />
-      <SurveysList />
+      <SurveyTemplatesList />
     </div>
   )
 }

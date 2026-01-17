@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './global.css';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import SurveysList from './components/SurveysList';
+import SurveyTemplatesList from './components/SurveyTemplatesList';
 import Survey from './pages/Survey';
 import EditSurvey from './pages/EditSurvey';
-import NewSurvey from './pages/NewSurvey';
+import NewSurveyTemplate from './pages/NewSurveyTemplate';
 import Cookies from "js-cookie";
 import Navbar from './components/Navbar';
 import type { ReactNode } from 'react';
@@ -43,15 +43,15 @@ function App() {
         } />
         <Route path="/surveys" element={
           <ProtectedRoute>
-            <SurveysList />
+            <SurveyTemplatesList />
           </ProtectedRoute>
         } />
-        <Route path="/surveys/new" element={
+        <Route path="/survey-templates/new" element={
           <ProtectedRoute>
-            <NewSurvey />
+            <NewSurveyTemplate />
           </ProtectedRoute>
         } />
-        <Route path="/surveys/edit/:id" element={
+        <Route path="/survey-templates/edit/:id" element={
           <ProtectedRoute>
             <EditSurvey />
           </ProtectedRoute>

@@ -1,22 +1,21 @@
 import { useCallback, useState } from "react"
-import CreateSurvey from "../components/CreateSurvey"
+import CreateSurveyTemplate from "../components/CreateSurvey"
 import type { Question } from "../types/Question";
 import QuestionCreator from "../components/QuestionCreator";
 import QuestionsList from "../components/QuestionsList";
-import type { Survey } from "../types/Survey";
+import type { SurveyTemplate } from "../types/SurveyTemplate";
 import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
-const NewSurvey = () => {
-  const [surveyInfo, setSurveyInfo] = useState<Survey>({
+const NewSurveyTemplate = () => {
+  const [surveyInfo, setSurveyInfo] = useState<SurveyTemplate>({
     title: "",
-    description: "",
-    emailSuffix: ""
+    description: ""
   })
   const [questions, setQuestions] = useState<Array<Question>>([]);
   const navigate = useNavigate()
 
-  const createSurvey = useCallback(() => {
+  const createSurveyTemplate = useCallback(() => {
     if (questions.length == 0) {
       return
     }
@@ -24,8 +23,8 @@ const NewSurvey = () => {
       return
     }
 
-    axiosInstance.post("/admin/surveys/new", {
-      surveyInfo: surveyInfo,
+    axiosInstance.post("/admin/survey-templates/new", {
+      surveyTemplateInfo: surveyInfo,
       questions: questions
     }).then(() => {
       navigate("/")
@@ -37,10 +36,10 @@ const NewSurvey = () => {
   return (
     <div className="flex box-border gap-5">
       <div className="flex flex-col w-1/3">
-        <CreateSurvey surveyInfo={surveyInfo} setSurveyInfo={setSurveyInfo} />
+        <CreateSurveyTemplate surveyTemplateInfo={surveyInfo} setSurveyInfo={setSurveyInfo} />
         <button className="w-full bg-pink-400 hover:bg-pink-500 cursor-pointer m-2 mt-0 text-xl rounded-md"
-        onClick={() => {createSurvey()}}
-        >Create Survey</button>
+        onClick={() => {createSurveyTemplate()}}
+        >Create Template</button>
       </div>
       <div className="flex flex-col w-2/3 m-2 gap-5">
         <QuestionCreator setQuestions={setQuestions} />
@@ -50,4 +49,4 @@ const NewSurvey = () => {
   )
 }
 
-export default NewSurvey
+export default NewSurveyTemplate

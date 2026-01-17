@@ -1,7 +1,9 @@
 export interface Survey {
     id?: number,
     title: string,
-    description: string,
     emailSuffix: string,
+    startDate: string,
+    endDate: string,
+    description: string,
     createdAt?: string
 }
